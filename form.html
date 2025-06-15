@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Styled Form</title>
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      width: 450px;
+      border-radius: 10px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .form-row label {
+      font-weight: bold;
+      width: 120px;
+      font-size: 14px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      flex: 1;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #999;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 10px 10px 35px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    input.error, select.error, textarea.error {
+      border-color: #e74c3c;
+      background-color: #ffe6e6;
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-left: 125px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-message.active {
+      display: block;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: orange;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 125px;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="form-container" onsubmit="return validateForm()">
+    <!-- First Name -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="firstName">First Name</label>
+        <div class="input-wrapper">
+          <i class="fa fa-user"></i>
+          <input type="text" id="firstName" placeholder="First Name" />
+        </div>
+      </div>
+      <div class="error-message" id="errorFirst">Please supply your first name</div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="lastName">Last Name</label>
+        <div class="input-wrapper">
+          <i class="fa fa-user"></i>
+          <input type="text" id="lastName" placeholder="Last Name" />
+        </div>
+      </div>
+      <div class="error-message" id="errorLast">Please supply your last name</div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="email">E-Mail</label>
+        <div class="input-wrapper">
+          <i class="fa fa-envelope"></i>
+          <input type="email" id="email" placeholder="E-Mail Address" />
+        </div>
+      </div>
+      <div class="error-message" id="errorEmail">Please supply your email address</div>
+    </div>
+
+    <!-- Phone -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="phone">Phone #</label>
+        <div class="input-wrapper">
+          <i class="fa fa-phone"></i>
+          <input type="text" id="phone" placeholder="(845)555-1212" />
+        </div>
+      </div>
+      <div class="error-message" id="errorPhone">Please supply your phone number</div>
+    </div>
+
+    <!-- Address -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="address">Address</label>
+        <div class="input-wrapper">
+          <i class="fa fa-location-dot"></i>
+          <input type="text" id="address" placeholder="Address" />
+        </div>
+      </div>
+      <div class="error-message" id="errorAddress">Please supply your street address</div>
+    </div>
+
+    <!-- City -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="city">City</label>
+        <div class="input-wrapper">
+          <i class="fa fa-city"></i>
+          <input type="text" id="city" placeholder="City" />
+        </div>
+      </div>
+      <div class="error-message" id="errorCity">Please supply your city</div>
+    </div>
+
+    <!-- State -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="state">State</label>
+        <select id="state">
+          <option value="">Please select your state</option>
+          <option value="AP">Andhra Pradesh</option>
+          <option value="TS">Telangana</option>
+          <option value="KA">Karnataka</option>
+        </select>
+      </div>
+      <div class="error-message" id="errorState">Please select your state</div>
+    </div>
+
+    <!-- Hosting -->
+    <div class="form-group">
+      <div class="form-row">
+        <label>Do you have hosting?</label>
+        <div class="radio-group">
+          <input type="radio" name="hosting" value="Yes" /> Yes
+          <input type="radio" name="hosting" value="No" /> No
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Description -->
+    <div class="form-group">
+      <div class="form-row">
+        <label for="desc">Project Description</label>
+        <textarea id="desc" rows="3" placeholder="Project Description"></textarea>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Send <i class="fa fa-paper-plane"></i></button>
+  </form>
+
+  <script>
+    function validateForm() {
+      let valid = true;
+
+      function check(id, errId) {
+        const input = document.getElementById(id);
+        const error = document.getElementById(errId);
+        if (input.value.trim() === "") {
+          input.classList.add("error");
+          error.classList.add("active");
+          valid = false;
+        } else {
+          input.classList.remove("error");
+          error.classList.remove("active");
+        }
+      }
+
+      check("firstName", "errorFirst");
+      check("lastName", "errorLast");
+      check("email", "errorEmail");
+      check("phone", "errorPhone");
+      check("address", "errorAddress");
+      check("city", "errorCity");
+
+      const state = document.getElementById("state");
+      const errorState = document.getElementById("errorState");
+      if (state.value === "") {
+        state.classList.add("error");
+        errorState.classList.add("active");
+        valid = false;
+      } else {
+        state.classList.remove("error");
+        errorState.classList.remove("active");
+      }
+
+      return valid;
+    }
+  </script>
+
+</body>
+</html>
